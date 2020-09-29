@@ -13,7 +13,7 @@ struct Todo {
 	var task : String
 	var dueDate : String
 	
-	init(category: Category, task: String, date: String) {
+	init(category: Category, task: String, dueDate: String) {
 		self.category = category
 		self.task = task
 		self.dueDate = dueDate
