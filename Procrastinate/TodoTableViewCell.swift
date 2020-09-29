@@ -29,7 +29,7 @@ class TodoTableViewCell: UITableViewCell {
     }
     
 	public func configure(with todo: Todo) {
-		categoryIdentifier.backgroundColor = todo.category.color
+		categoryIdentifier.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
 		todoLabel.text = todo.task
 		date.text = todo.dueDate
 	}

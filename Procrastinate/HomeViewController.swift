@@ -9,10 +9,11 @@
 import UIKit
 
 class HomeViewController: UITableViewController {
-	var allTodos: [Todo] = []
+	var allTodos = [Todo]()
     override func viewDidLoad() {
         super.viewDidLoad()
-		allTodos +=
+        self.tableView.register(UINib(nibName: "TodoTableViewCell", bundle: nil), forCellReuseIdentifier: TodoTableViewCell.identifier)
+        readSavedTodos()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -22,45 +23,44 @@ class HomeViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    func saveAllTodos(){
+        //dictionary for cards
+        let dictionaryArray = allTodos.map { (todo) -> [String: String] in
+            return ["color": todo.categoryColor, "task": todo.task, "dueDate": todo.dueDate]
+        }
+        UserDefaults.standard.set(dictionaryArray, forKey: Constants.UserDefaultKeys.allTodos)
+        
+        print("Todos saved")
+    }
+    
+    func readSavedTodos(){
+        let testTodo = Todo(categoryColor: "Green", task: "Jump off a cliff", dueDate: "09/28")
+        for _ in 0...10 {
+            allTodos.append(testTodo)
+        }
+//        if let dictionaryArray = UserDefaults.standard.array(forKey: Constants.UserDefaultKeys.allTodos) as? [[String: String]]{
+//            let savedCards = dictionaryArray.map { dictionary -> Todo in
+//                return Todo(categoryColor: dictionary["color"]!, task: dictionary["task"]!, dueDate: dictionary["dueDate"]!)
+//            }
+//            allTodos.append(contentsOf: savedCards)
+//        }
+    }
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return allTodos.count
     }
 	
-	func saveAllTodos(){
-        
-        //dictionary for cards
-        let dictionaryArray = allTodos.map { (card) -> [String: String] in
-            return ["category": card.question, "answer": card.answer]
-        }
-        UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
-        
-        print("Flashcards saved")
-    }
-    
-    func readSavedTodos(){
-        if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String: String]]{
-            let savedCards = dictionaryArray.map { dictionary -> Flashcard in
-                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
-            }
-            flashcards.append(contentsOf: savedCards)
-        }
-    }
-
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as! TodoTableViewCell
+        cell.configure(with: allTodos[indexPath.row])
         return cell
     }
-    */
+	
 
     /*
     // Override to support conditional editing of the table view.

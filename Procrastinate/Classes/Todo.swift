@@ -9,12 +9,12 @@
 import Foundation
 
 struct Todo {
-	var category : Category
+	var categoryColor : String
 	var task : String
 	var dueDate : String
 	
-	init(category: Category, task: String, dueDate: String) {
-		self.category = category
+	init(categoryColor: String, task: String, dueDate: String) {
+		self.categoryColor = categoryColor
 		self.task = task
 		self.dueDate = dueDate
 	}
