@@ -14,6 +14,3 @@ When faced with many time sensitive tasks, you can get easily overwhelmed. What 
 - Add todos and the dates they need to be done by for each category
 - Watch as your homescreen organizes your life with all your todos in order and color codes them for each category
 
-## Features
-- Day planner
-
